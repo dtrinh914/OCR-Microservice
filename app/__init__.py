@@ -1,5 +1,6 @@
 # Code Reference: https://flask.palletsprojects.com/en/2.0.x/patterns/fileuploads/
 
+from flask import Flask, request
 import os
 import tempfile
 from werkzeug.utils import secure_filename
