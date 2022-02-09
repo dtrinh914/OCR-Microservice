@@ -1,6 +1,6 @@
 # Code Reference: https://flask.palletsprojects.com/en/2.0.x/patterns/fileuploads/
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import os
 import tempfile
 from werkzeug.utils import secure_filename
@@ -34,23 +34,24 @@ def create_app() -> Flask:
     @app.route('/', methods=['POST'])
     def upload_file():
         if 'file' not in request.files:
-            return 'Missing key with name of "file" in POST request'
+            return jsonify({'Error': 'Missing key with name of "file" in POST request'}), 422
 
         file = request.files['file']
 
         if file.filename == '':
-            return 'No file selected'
+            return jsonify({'Error': 'No file selected'}), 422
 
         if not allowed_file(file.filename):
-            return 'File type not allowed'
+            return jsonify({'Error': 'File type not allowed'}), 422
 
         if file:
             try:
                 filename = secure_filename(file.filename)
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 file.save(filepath)
-                return ocr(filepath)
+                ocr_text = ocr(filepath)
+                return jsonify({'text': ocr_text}), 200
             except werkzeug.exceptions.RequestEntityTooLarge:
-                return 'File too large'
+                return jsonify({'Error': 'File too large'}), 413
 
     return app
