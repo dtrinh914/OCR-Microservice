@@ -31,7 +31,7 @@ def create_app() -> Flask:
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     app.config['MAX_CONTENT_LENGTH'] = 2 * 1000 * 1000  # set max size to 2MB
 
-    @app.route('/', methods=['POST'])
+    @app.route('/ocr', methods=['POST'])
     def upload_file():
         if 'file' not in request.files:
             return jsonify({'Error': 'Missing key with name of "file" in POST request'}), 422
