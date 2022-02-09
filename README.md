@@ -11,13 +11,11 @@ OCR Microservice Built in Flask
 This microservice has one endpoint:
 
 POST /ocr 
-  - Endpoint looks for a file in the key "file" in the request body
+  - Endpoint looks for a file with the key of "file" in the request body
 
 Example Response:
   {
-    "text": "Mild Splendour of the various-vested Night!\nMother of wildly-working visions! hail!\nI watch thy gliding, while with watery light\nThy weak eye    
-    glimmers through a fleecy veil;\nAnd when thou lovest thy pale orb to shroud\nBehind the gather’d blackness lost on high;\nAnd when thou dartest from the wind-
-    rent cloud\nThy placid lightning o’er the awaken’d sky.\n"
+    "text": "Mild Splendour of the various-vested Night!\nMother of wildly-working visions! hail!\nI watch thy gliding, while with watery light\nThy weak eye glimmers through a fleecy veil;\nAnd when thou lovest thy pale orb to shroud\nBehind the gather’d blackness lost on high;\nAnd when thou dartest from the wind rent cloud\nThy placid lightning o’er the awaken’d sky.\n"
   }
 
 Error Response:
